@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('page_groups', function (Blueprint $table) {
+            if (config('web-pages.incrementing', false)) {
+                $table->id();
+                $table->unsignedBigInteger('tenant_id')->nullable();
+                $table->unsignedBigInteger('user_id')->nullable()->constrained('users')->cascadeOnDelete();
+             } else {
+                $table->ulid('id')->primary();
+                $table->ulid('tenant_id')->nullable();
+                $table->foreignUlid('user_id')->nullable()->constrained('users')->cascadeOnDelete();
+            } 
+            $table->string('singular_name', 255)->nullable()->comment('Nome singular  do grupo');
+            $table->string('plural_name', 255)->nullable()->comment('Nome plural  do grupo');
+            $table->string('slug', 255)->nullable()->comment('Slug do grupo');
+            $table->string('icon', 255)->nullable()->comment('Icone  do grupo');
+            $table->integer('ordering')->default(0)->comment('Ordem do grupo');
+            $table->enum('status', ['draft', 'published'])->default('published')->comment('Status do grupo');
+            $table->text('description')->nullable()->comment('Descrição do grupo');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    
+    public function down(): void
+    {
+        Schema::dropIfExists('page_groups');
+    }
+};
