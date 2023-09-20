@@ -35,6 +35,14 @@ return [
                 'label' => 'Slug',
                 'placeholder' => 'Enter the slug (will be generated automatically if left empty)',
             ],
+            'icon' => [
+                'label' => 'Icon',
+                'placeholder' => 'Enter the icon',
+            ],
+            'autheticated' => [
+                'label' => 'Autheticated',
+                'placeholder' => 'Enter the autheticated',
+            ],
             'description' => [
                 'label' => 'Description',
                 'placeholder' => 'Enter the description',

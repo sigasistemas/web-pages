@@ -25,6 +25,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\DeleteAction;
@@ -221,13 +222,21 @@ class WebPageResource extends Resource
                     ->label(__('web-pages::web-pages.filament.form.slug.label'))
                     ->placeholder(__('web-pages::web-pages.filament.form.slug.placeholder'))
                     ->columnSpan([
-                        'md' => 6,
+                        'md' => 5,
                     ])
                     ->required()
                     ->unique(Page::class, 'slug', ignoreRecord: true),
                 static::getIconsFormSelectField()
                     ->columnSpan([
-                        'md' => 6,
+                        'md' => 4,
+                    ]),
+                Toggle::make('autheticated')
+                    ->extraAttributes([
+                        'class' => 'mt-4'
+                    ])
+                    ->label(__('web-pages::web-pages.filament.form.autheticated.label'))
+                    ->columnSpan([
+                        'md' => 3,
                     ]),
                 Textarea::make('description')
                     ->label(__('web-pages::web-pages.filament.form.description.label'))
