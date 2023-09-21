@@ -10,6 +10,7 @@ namespace Callcocam\WebPages\Filament\Resources;
 
 use Callcocam\WebPages\Contracts\WebPageTemplate;
 use Callcocam\WebPages\Filament\HasIconsColumn;
+use Callcocam\WebPages\Filament\Resources\PageWidgetResource\RelationManagers\WidgetsRelationManager;
 use Callcocam\WebPages\Filament\Resources\WebPageResource\Pages\CreateWebPage;
 use Callcocam\WebPages\Filament\Resources\WebPageResource\Pages\EditWebPage;
 use Callcocam\WebPages\Filament\Resources\WebPageResource\Pages\ListWebPages;
@@ -127,6 +128,7 @@ class WebPageResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: false),
 
                 TextColumn::make('status')
+                    ->label(__('web-pages::web-pages.filament.table.status_label'))
                     ->badge()
                     ->getStateUsing(fn (Page $record): string => $record->published_at->isPast() && ($record->published_until?->isFuture() ?? true) ? __('web-pages::web-pages.filament.table.status.published') : __('web-pages::web-pages.filament.table.status.draft'))
                     ->colors([
@@ -182,6 +184,13 @@ class WebPageResource extends Resource
             ]);
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            WidgetsRelationManager::class
+        ];
+    }
+
     public static function getPrimaryColumnSchema(): Component
     {
         return Section::make()
@@ -217,6 +226,7 @@ class WebPageResource extends Resource
                         'md' => 5,
                     ])
                     ->required(),
+
 
                 TextInput::make('slug')
                     ->label(__('web-pages::web-pages.filament.form.slug.label'))

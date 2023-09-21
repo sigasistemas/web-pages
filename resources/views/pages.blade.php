@@ -1,3 +1,5 @@
 <x-filament-panels::page>
-Pages
+    @if($content)
+    {!! $content !!}
+    @endif
 </x-filament-panels::page>

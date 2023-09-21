@@ -8,6 +8,8 @@
 
 namespace Callcocam\WebPages;
 
+use Callcocam\WebPages\Filament\Resources\WebPageWidgetResource;
+use Callcocam\WebPages\Filament\Resources\WebPageGroupResource;
 use Callcocam\WebPages\Filament\Resources\WebPageResource;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
@@ -23,6 +25,8 @@ class WebPagesPlugin implements Plugin
     {
         $panel->resources([
             WebPageResource::class,
+            WebPageGroupResource::class,
+            WebPageWidgetResource::class,
         ]);
     }
 

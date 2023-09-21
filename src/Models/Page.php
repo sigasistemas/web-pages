@@ -53,4 +53,9 @@ class Page extends Model
     {
         return $this->belongsTo(PageGroup::class);
     }
+
+    public function widgets()
+    {
+        return $this->hasMany(PageWidget::class);
+    }
 }

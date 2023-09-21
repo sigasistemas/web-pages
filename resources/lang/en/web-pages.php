@@ -15,6 +15,9 @@ return [
                 'published' => 'published',
                 'draft' => 'draft',
             ],
+            'singular_name' => config('filament-pages.filament.table.singular_name', 'Singular name'),
+            'plural_name' => config('filament-pages.filament.table.plural_name', 'Plural name'),
+            'status_label' => config('filament-pages.filament.table.status', 'Status'),
             'title' => 'Title',
             'created_at' => 'Created at',
         ],
@@ -65,5 +68,33 @@ return [
                 'label' => 'Updated at',
             ],
         ],
+        'widgets' => [
+            'form' => [
+                'name' => [
+                    'label' => 'Name',
+                    'placeholder' => 'Enter the name',
+                ],
+                'description' => [
+                    'label' => 'Description',
+                    'placeholder' => 'Enter the description',
+                ],
+                'column' => [
+                    'label' => 'Columns',
+                    'placeholder' => 'Enter the column',
+                ],
+                'ordering' => [
+                    'label' => 'Ordering',
+                    'placeholder' => 'Enter the ordering',
+                ],
+                'published_at' => [
+                    'label' => 'Published at',
+                    'displayFormat' => 'd. M Y',
+                ],
+                'published_down' => [
+                    'label' => 'Published until',
+                    'displayFormat' => 'd. M Y',
+                ],
+            ]
+        ]
     ],
 ];

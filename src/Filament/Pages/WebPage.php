@@ -73,5 +73,18 @@ class WebPage extends Page
             ->withoutMiddleware(static::getWithoutRouteMiddleware($panel))
             ->name((string) str($slug)->replace('/', '.'));
     }
+
+     /**
+     * @return array<string, mixed>
+     */
+    protected function getViewData(): array
+    {
+        return [
+            'pageData' => $this->pageData, 
+            'content' =>data_get(static::$staticPageData, 'data.content.content'),
+            'template' =>data_get(static::$staticPageData, 'data.template'),
+            'templateName' =>data_get(static::$staticPageData, 'data.template_name'),
+        ];
+    }
  
 }
