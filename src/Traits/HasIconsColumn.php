@@ -6,7 +6,7 @@
  * https://www.sigasmart.com.br
  */
 
-namespace Callcocam\WebPages\Filament;
+ namespace Callcocam\WebPages\Traits;
 
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Select;

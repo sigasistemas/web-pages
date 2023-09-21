@@ -76,6 +76,7 @@ return [
                 'label' => 'Widgets',
                 'helperText' => 'Select the widgets that will be displayed in this page',
             ],
+
         ],
         'widgets' => [
             'form' => [
@@ -111,7 +112,7 @@ return [
                     'pages' => [
                         'label' => 'Pages',
                         'helperText' => 'Select the pages that will be displayed in this widget',
-                    ], 
+                    ],
                 ],
                 'repeater' => [
                     'stats' => [
@@ -133,20 +134,38 @@ return [
                             'label' => 'Description',
                             'placeholder' => 'Enter the description',
                         ],
-                        'page_widget_stat_items'=>[
+                        'page_widget_stat_items' => [
                             'label' => 'Items',
                             'name' => [
                                 'label' => 'Name',
                                 'placeholder' => 'Enter the name',
-                            ], 
+                            ],
                             'description' => [
                                 'label' => 'Description',
                                 'placeholder' => 'Enter the description',
                             ],
                         ]
                     ],
-                ],
+                ]
             ]
+        ],
+        'widget-stats' => [
+            'form' => [
+                'modelLabel'=> 'Widget stat',
+                'pluralLabel' => 'Widget stats',
+                'name' => [
+                    'label' => 'Name',
+                    'placeholder' => 'Enter the name',
+                ],
+                'color'=> [
+                    'label' => 'Color',
+                    'placeholder' => 'Enter the color',
+                ],
+                'ordering' => [
+                    'label' => 'Ordering',
+                    'placeholder' => 'Enter the ordering',
+                ],
+            ],
         ]
     ],
 ];

@@ -7,11 +7,13 @@
  */
 
 namespace Callcocam\WebPages\Filament\Resources;
-
-use Callcocam\WebPages\Filament\HasIconsColumn;
+ 
 use Callcocam\WebPages\Filament\Resources\PageWidgetResource\Pages;
 use Callcocam\WebPages\Filament\Resources\PageWidgetResource\RelationManagers;
 use Callcocam\WebPages\Models\PageWidget;
+use Callcocam\WebPages\Traits\HasDatesFormForTableColums;
+use Callcocam\WebPages\Traits\HasIconsColumn;
+use Callcocam\WebPages\Traits\HasStatusColumn;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
@@ -27,7 +29,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class WebPageWidgetResource extends Resource
 {
-    use HasIconsColumn;
+    use HasIconsColumn, HasStatusColumn, HasDatesFormForTableColums;
 
     protected static ?string $model = PageWidget::class;
 
@@ -109,31 +111,26 @@ class WebPageWidgetResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('web-pages::web-pages.filament.widgets.form.name.label'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('column')
+                    ->label(__('web-pages::web-pages.filament.widgets.form.column.label'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('published_at')
+                    ->label(__('web-pages::web-pages.filament.widgets.form.published_at.label'))
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('published_down')
+                    ->label(__('web-pages::web-pages.filament.widgets.form.published_down.label'))
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('ordering')
+                    ->label(__('web-pages::web-pages.filament.widgets.form.ordering.label'))
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable(),
+                    static::getStatusTableIconColumn(),
+                    ...static::getFieldDatesFormForTable()
+                
             ])
             ->filters([
                 //
@@ -221,7 +218,7 @@ class WebPageWidgetResource extends Resource
                         ])
                         ->columnSpan([
                             'md' => 4
-                        ]) ,
+                        ]),
                     TextInput::make('description')
                         ->label(__('web-pages::web-pages.filament.widgets.form.repeater.stats.page_widget_stat_items.description.label'))
                         ->placeholder(__('web-pages::web-pages.filament.widgets.form.repeater.stats.page_widget_stat_items.description.placeholder'))

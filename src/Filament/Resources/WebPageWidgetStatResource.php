@@ -11,7 +11,10 @@ namespace Callcocam\WebPages\Filament\Resources;
 use Callcocam\WebPages\Filament\Resources\PageWidgetStatResource\Pages;
 use Callcocam\WebPages\Filament\Resources\PageWidgetStatResource\RelationManagers;
 use App\Models\PageWidgetStat;
+use Callcocam\WebPages\Traits\HasDatesFormForTableColums;
+use Callcocam\WebPages\Traits\HasStatusColumn; 
 use Callcocam\WebPages\Filament\Resources\PageWidgetStatResource\RelationManagers\PageWidgetStatItemsRelationManager;
+use Callcocam\WebPages\Traits\HasIconsColumn;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -22,78 +25,93 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class WebPageWidgetStatResource extends Resource
 {
+    use HasIconsColumn, HasStatusColumn, HasDatesFormForTableColums;
+
     protected static ?string $model = PageWidgetStat::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+
+    public static function getModelLabel(): string
+    {
+        return static::$modelLabel ?? __('web-pages::web-pages.filament.widget-stats.form.modelLabel');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+
+        return  __('web-pages::web-pages.filament.widget-stats.form.pluralLabel');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id')
+                Forms\Components\Select::make('page_widget_id')
+                    ->relationship('page_widget', 'name')
                     ->required()
-                    ->maxLength(26),
-                Forms\Components\TextInput::make('user_id')
-                    ->maxLength(26),
-                Forms\Components\TextInput::make('page_widget_id')
-                    ->maxLength(26),
-                Forms\Components\TextInput::make('tenant_id')
-                    ->maxLength(26),
+                    ->columnSpan([
+                        'md' => 2
+                    ])
+                    ->label(__('web-pages::web-pages.filament.widget-stats.form.name.label')),
                 Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->label(__('web-pages::web-pages.filament.widget-stats.form.name.label'))
+                    ->columnSpan([
+                        'md' => 3
+                    ])
                     ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('icon')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('color'),
+                static::getIconsFormSelectField()
+                    ->columnSpan([
+                        'md' => 3
+                    ]),
+                Forms\Components\Select::make('color')
+                    ->label(__('web-pages::web-pages.filament.widget-stats.form.color.label'))
+                    ->columnSpan([
+                        'md' => 2
+                    ])
+                    ->options([
+                        'primary' => 'primary',
+                        'secondary' => 'secondary',
+                        'success' => 'success',
+                        'danger' => 'danger',
+                        'warning' => 'warning',
+                        'info' => 'info',
+                        'gray' => 'gray',
+                    ]),
                 Forms\Components\TextInput::make('ordering')
+                    ->label(__('web-pages::web-pages.filament.widget-stats.form.ordering.label'))
+                    ->columnSpan([
+                        'md' => 2
+                    ])
                     ->required()
                     ->numeric()
                     ->default(0),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
+                static::getStatusFormRadioField(),
                 Forms\Components\Textarea::make('description')
                     ->maxLength(65535)
                     ->columnSpanFull(),
-            ]);
+            ])->columns(12);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('user_id')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('page_widget_id')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('tenant_id')
-                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('web-pages::web-pages.filament.widget-stats.form.name.label'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('icon')
-                    ->searchable(),
+                static::getIconsTableIconColumn(),
                 Tables\Columns\TextColumn::make('color')
+                    ->label(__('web-pages::web-pages.filament.widget-stats.form.color.label'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ordering')
+                    ->label(__('web-pages::web-pages.filament.widget-stats.form.ordering.label'))
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable(),
+                 static::getStatusTableIconColumn(),
+                 ...static::getFieldDatesFormForTable(),
             ])
             ->filters([
                 //

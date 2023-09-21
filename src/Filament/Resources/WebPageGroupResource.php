@@ -7,10 +7,10 @@
  */
 
 namespace Callcocam\WebPages\Filament\Resources;
-
-use Callcocam\WebPages\Filament\HasIconsColumn;
+ 
 use Callcocam\WebPages\Filament\Resources\PageGroupResource\Pages;
 use Callcocam\WebPages\Models\PageGroup;
+use Callcocam\WebPages\Traits\HasIconsColumn;
 use Filament\Forms;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Textarea;

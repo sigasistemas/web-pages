@@ -8,14 +8,14 @@
 
 namespace Callcocam\WebPages\Filament\Resources;
 
-use Callcocam\WebPages\Contracts\WebPageTemplate;
-use Callcocam\WebPages\Filament\HasIconsColumn;
+use Callcocam\WebPages\Contracts\WebPageTemplate; 
 use Callcocam\WebPages\Filament\Resources\PageWidgetResource\RelationManagers\WidgetsRelationManager;
 use Callcocam\WebPages\Filament\Resources\WebPageResource\Pages\CreateWebPage;
 use Callcocam\WebPages\Filament\Resources\WebPageResource\Pages\EditWebPage;
 use Callcocam\WebPages\Filament\Resources\WebPageResource\Pages\ListWebPages;
 use Callcocam\WebPages\Models\Page;
 use Callcocam\WebPages\Models\PageGroup;
+use Callcocam\WebPages\Traits\HasIconsColumn;
 use Carbon\Carbon;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Component;
