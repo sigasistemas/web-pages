@@ -67,6 +67,15 @@ return [
             'updated_at' => [
                 'label' => 'Updated at',
             ],
+            'section' => [
+                'widgets' => [
+                    'label' => 'Widgets',
+                ],
+            ],
+            'widgets' => [
+                'label' => 'Widgets',
+                'helperText' => 'Select the widgets that will be displayed in this page',
+            ],
         ],
         'widgets' => [
             'form' => [
@@ -93,6 +102,49 @@ return [
                 'published_down' => [
                     'label' => 'Published until',
                     'displayFormat' => 'd. M Y',
+                ],
+                'pages' => [
+                    'label' => 'Pages',
+                    'helperText' => 'Select the pages that will be displayed in this widget',
+                ],
+                'section' => [
+                    'pages' => [
+                        'label' => 'Pages',
+                        'helperText' => 'Select the pages that will be displayed in this widget',
+                    ], 
+                ],
+                'repeater' => [
+                    'stats' => [
+                        'label' => 'Stats',
+                        'helperText' => 'Select the stats that will be displayed in this widget',
+                        'name' => [
+                            'label' => 'Name',
+                            'placeholder' => 'Enter the name',
+                        ],
+                        'color' => [
+                            'label' => 'Color',
+                            'placeholder' => 'Enter the color',
+                        ],
+                        'icon' => [
+                            'label' => 'Icon',
+                            'placeholder' => 'Enter the icon',
+                        ],
+                        'description' => [
+                            'label' => 'Description',
+                            'placeholder' => 'Enter the description',
+                        ],
+                        'page_widget_stat_items'=>[
+                            'label' => 'Items',
+                            'name' => [
+                                'label' => 'Name',
+                                'placeholder' => 'Enter the name',
+                            ], 
+                            'description' => [
+                                'label' => 'Description',
+                                'placeholder' => 'Enter the description',
+                            ],
+                        ]
+                    ],
                 ],
             ]
         ]

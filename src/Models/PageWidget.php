@@ -22,4 +22,14 @@ class PageWidget extends Model
     protected $keyType = 'string';
 
     public $incrementing = false;
+
+    public function pages()
+    {
+        return $this->belongsToMany(Page::class);
+    }
+
+    public function page_widget_stats()
+    {
+        return $this->hasMany(PageWidgetStat::class);
+    }
 }

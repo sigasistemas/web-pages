@@ -17,8 +17,10 @@ use Callcocam\WebPages\Filament\Resources\WebPageResource\Pages\ListWebPages;
 use Callcocam\WebPages\Models\Page;
 use Callcocam\WebPages\Models\PageGroup;
 use Carbon\Carbon;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Placeholder;
@@ -187,7 +189,7 @@ class WebPageResource extends Resource
     public static function getRelations(): array
     {
         return [
-            WidgetsRelationManager::class
+            //
         ];
     }
 
@@ -247,6 +249,16 @@ class WebPageResource extends Resource
                     ->label(__('web-pages::web-pages.filament.form.autheticated.label'))
                     ->columnSpan([
                         'md' => 3,
+                    ]),
+                Fieldset::make(__('web-pages::web-pages.filament.form.fieldset.widgets.label'))
+                    ->columnSpanFull()
+                    ->schema([
+                        CheckboxList::make('widgets')
+                            ->relationship('widgets', 'name')
+                            ->bulkToggleable()
+                            ->searchable()->label(__('web-pages::web-pages.filament.form.widgets.label'))
+                            ->helperText(__('web-pages::web-pages.filament.form.widgets.helperText'))
+                            ->columnSpanFull()
                     ]),
                 Textarea::make('description')
                     ->label(__('web-pages::web-pages.filament.form.description.label'))

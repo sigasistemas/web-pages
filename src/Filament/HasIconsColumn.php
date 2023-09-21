@@ -18,7 +18,7 @@ trait HasIconsColumn
 
     public static function getIconsColumnLabel(): string
     {
-        return 'Icons';
+        return __('web-pages::web-pages.filament.form.icon.label');
     }
 
     public static function getIconsTableIconColumn(): IconColumn

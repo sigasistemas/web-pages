@@ -162,7 +162,9 @@ class WebPagesServiceProvider extends PackageServiceProvider
         return [
             'create_web_page_groups_table',
             'create_web_pages_table',
-            'create_web_page_widgets_table'
+            'create_web_page_widgets_table',
+            'create_web_page_widget_stats_table',
+            'create_page_page_widget_table'
         ];
     }
 }

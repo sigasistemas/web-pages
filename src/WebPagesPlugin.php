@@ -11,6 +11,7 @@ namespace Callcocam\WebPages;
 use Callcocam\WebPages\Filament\Resources\WebPageWidgetResource;
 use Callcocam\WebPages\Filament\Resources\WebPageGroupResource;
 use Callcocam\WebPages\Filament\Resources\WebPageResource;
+use Callcocam\WebPages\Filament\Resources\WebPageWidgetStatResource;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
@@ -27,6 +28,7 @@ class WebPagesPlugin implements Plugin
             WebPageResource::class,
             WebPageGroupResource::class,
             WebPageWidgetResource::class,
+            WebPageWidgetStatResource::class,
         ]);
     }
 

@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('page_widget_stats', function (Blueprint $table) {
+            if (config('web-pages.incrementing', false)) {
+                $table->id();
+                $table->unsignedBigInteger('tenant_id')->nullable();
+                $table->unsignedBigInteger('user_id')->nullable()->constrained('users')->cascadeOnDelete();
+                $table->unsignedBigInteger('page_widget_id')->nullable()->constrained('page_widgets')->cascadeOnDelete();
+            } else {
+                $table->ulid('id')->primary();
+                $table->ulid('tenant_id')->nullable();
+                $table->foreignUlid('user_id')->nullable()->constrained('users')->cascadeOnDelete();
+                $table->foreignUlid('page_widget_id')->nullable()->constrained('page_widgets')->cascadeOnDelete();
+            } 
+            $table->string('name', 255)->nullable()->comment('Nome Stas'); 
+            $table->string('slug', 255)->nullable()->comment('Slug do Stas');
+            $table->string('value', 255)->nullable()->comment('Value do Stas');
+            $table->string('icon', 255)->nullable()->comment('Icon do Widget'); 
+            $table->string('color', 255)->nullable()->comment('Color do Stas'); 
+            $table->integer('ordering')->default(0)->comment('Ordem do Stas');
+            $table->enum('status', ['draft', 'published'])->default('published')->comment('Status do Stas'); 
+            $table->text('description')->nullable()->comment('Descrição do Stas');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    
+    public function down(): void
+    {
+        Schema::dropIfExists('page_widget_stats');
+    }
+};

@@ -56,6 +56,6 @@ class Page extends Model
 
     public function widgets()
     {
-        return $this->hasMany(PageWidget::class);
+        return $this->belongsToMany(PageWidget::class)->with('page_widget_stats');
     }
 }

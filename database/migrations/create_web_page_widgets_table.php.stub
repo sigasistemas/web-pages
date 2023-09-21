@@ -26,6 +26,7 @@ return new class extends Migration
             $table->dateTime('published_at')->nullable()->comment('Data de publicação da Widget');
             $table->dateTime('published_down')->nullable()->comment('Data de publicação até da Widget'); 
             $table->integer('ordering')->default(0)->comment('Ordem da página');
+            $table->integer('all_pages')->default(0)->comment('Todas as páginas');
             $table->enum('status', ['draft', 'published'])->default('published')->comment('Status da página'); 
             $table->text('description')->nullable()->comment('Descrição da página');
             $table->timestamps();
