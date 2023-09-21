@@ -1,5 +1,7 @@
-<x-filament-panels::page>
-    @if($content)
-    {!! $content !!}
-    @endif
-</x-filament-panels::page>
+<x-web-pages::page>
+   @isset($content)
+        @if($content)
+        {!! $content !!}
+        @endif
+    @endisset
+</x-web-pages::page>

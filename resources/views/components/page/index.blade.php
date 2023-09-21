@@ -22,7 +22,7 @@
         {{ \Filament\Support\Facades\FilamentView::renderHook('panels::page.header-widgets.before', scopes: $this->getRenderHookScopes()) }}
 
         @if ($headerWidgets = $this->getVisibleHeaderWidgets())
-            <x-filament-widgets::widgets
+            <x-web-pages::widgets
                 :columns="$this->getHeaderWidgetsColumns()"
                 :data="$widgetData"
                 :widgets="$headerWidgets"
@@ -36,13 +36,13 @@
         {{ \Filament\Support\Facades\FilamentView::renderHook('panels::page.footer-widgets.before', scopes: $this->getRenderHookScopes()) }}
 
         @if ($footerWidgets = $this->getVisibleFooterWidgets())
-            <x-filament-widgets::widgets
+            <x-web-pages::widgets
                 :columns="$this->getFooterWidgetsColumns()"
                 :data="$widgetData"
                 :widgets="$footerWidgets"
             />
         @endif
-
+  
         {{ \Filament\Support\Facades\FilamentView::renderHook('panels::page.footer-widgets.after', scopes: $this->getRenderHookScopes()) }}
 
         @if ($footer = $this->getFooter())
