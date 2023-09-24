@@ -8,7 +8,7 @@
 
 namespace Callcocam\WebPages\Filament\Resources;
 
-use Callcocam\WebPages\Contracts\WebPageTemplate; 
+use Callcocam\WebPages\Contracts\WebPageTemplate;
 use Callcocam\WebPages\Filament\Resources\PageWidgetResource\RelationManagers\WidgetsRelationManager;
 use Callcocam\WebPages\Filament\Resources\WebPageResource\Pages\CreateWebPage;
 use Callcocam\WebPages\Filament\Resources\WebPageResource\Pages\EditWebPage;
@@ -110,6 +110,7 @@ class WebPageResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->reorderable('ordering')
             ->columns([
                 TextColumn::make('singular_name')
                     ->label(__('web-pages::web-pages.filament.form.singular_name.label'))

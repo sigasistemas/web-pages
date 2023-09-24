@@ -1,7 +1,7 @@
 @php
     $navigation = filament()->getNavigation();
-@endphp 
-<x-filament-panels::layout.base :livewire="$livewire">
+@endphp
+<x-web-pages::layout.base :livewire="$livewire">
     <div class="fi-layout flex min-h-screen w-full overflow-x-clip">
         <div
             x-cloak
@@ -60,6 +60,7 @@
         },
     ])
 >
+    {{ \Filament\Support\Facades\FilamentView::renderHook('panels::banners') }}
     {{ \Filament\Support\Facades\FilamentView::renderHook('panels::content.start') }}
 
     {{ $slot }}
@@ -71,4 +72,4 @@
 
         </div>
     </div>
-</x-filament-panels::layout.base>
+</x-web-pages::layout.base>

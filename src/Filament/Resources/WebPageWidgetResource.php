@@ -7,7 +7,7 @@
  */
 
 namespace Callcocam\WebPages\Filament\Resources;
- 
+
 use Callcocam\WebPages\Filament\Resources\PageWidgetResource\Pages;
 use Callcocam\WebPages\Filament\Resources\PageWidgetResource\RelationManagers;
 use Callcocam\WebPages\Models\PageWidget;
@@ -92,6 +92,7 @@ class WebPageWidgetResource extends Resource
                 Repeater::make('page_widget_stats')
                     ->relationship()
                     ->schema(static::getPageWidgetStatSchema())
+                    ->itemLabel(fn (array $state): ?string => data_get($state, 'name'))
                     ->reorderable()
                     ->collapsed()
                     ->defaultItems(0)
@@ -128,9 +129,9 @@ class WebPageWidgetResource extends Resource
                     ->label(__('web-pages::web-pages.filament.widgets.form.ordering.label'))
                     ->numeric()
                     ->sortable(),
-                    static::getStatusTableIconColumn(),
-                    ...static::getFieldDatesFormForTable()
-                
+                static::getStatusTableIconColumn(),
+                ...static::getFieldDatesFormForTable()
+
             ])
             ->filters([
                 //
@@ -173,6 +174,11 @@ class WebPageWidgetResource extends Resource
                         ->required()
                         ->columnSpanFull()
                         ->maxLength(255),
+                    Textarea::make('description')
+                        ->label(__('web-pages::web-pages.filament.widgets.form.repeater.stats.description.label'))
+                        ->placeholder(__('web-pages::web-pages.filament.widgets.form.repeater.stats.description.placeholder'))
+
+                        ->columnSpanFull(),
                     static::getIconsFormSelectField()
                         ->label(__('web-pages::web-pages.filament.widgets.form.repeater.stats.icon.label'))
                         ->placeholder(__('web-pages::web-pages.filament.widgets.form.repeater.stats.icon.placeholder'))
@@ -192,11 +198,6 @@ class WebPageWidgetResource extends Resource
                         ->label(__('web-pages::web-pages.filament.widgets.form.repeater.stats.color.label'))
                         ->placeholder(__('web-pages::web-pages.filament.widgets.form.repeater.stats.color.placeholder'))
 
-                        ->columnSpanFull(),
-                    Textarea::make('description')
-                        ->label(__('web-pages::web-pages.filament.widgets.form.repeater.stats.description.label'))
-                        ->placeholder(__('web-pages::web-pages.filament.widgets.form.repeater.stats.description.placeholder'))
-
                         ->columnSpanFull()
                 ])->columnSpan([
                     'md' => 4
@@ -204,6 +205,7 @@ class WebPageWidgetResource extends Resource
             Repeater::make('page_widget_stat_items')
                 ->relationship()
                 ->defaultItems(0)
+                ->itemLabel(fn (array $state): ?string => data_get($state, 'name'))
                 ->label(__('web-pages::web-pages.filament.widgets.form.repeater.stats.page_widget_stat_items.label'))
                 ->schema([
                     Select::make('name')

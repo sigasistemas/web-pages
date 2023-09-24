@@ -7,7 +7,7 @@
  */
 
 namespace Callcocam\WebPages\Filament\Resources;
- 
+
 use Callcocam\WebPages\Filament\Resources\PageGroupResource\Pages;
 use Callcocam\WebPages\Models\PageGroup;
 use Callcocam\WebPages\Traits\HasIconsColumn;
@@ -61,12 +61,19 @@ class WebPageGroupResource extends Resource
                             ->label(__('web-pages::web-pages.filament.form.slug.label'))
                             ->placeholder(__('web-pages::web-pages.filament.form.slug.placeholder'))
                             ->columnSpan([
-                                'md' => 3,
+                                'md' => 2,
                             ])
                             ->required(),
                         static::getIconsFormSelectField()->columnSpan([
-                            'md' => 4,
+                            'md' => 3,
                         ]),
+                        TextInput::make('ordering')
+                            ->label(__('web-pages::web-pages.filament.form.ordering.label'))
+                            ->placeholder(__('web-pages::web-pages.filament.form.ordering.placeholder'))
+                            ->numeric()
+                            ->columnSpan([
+                                'md' => 2
+                            ]),
                         Textarea::make('description')
                             ->columnSpanFull()
                             ->label(__('web-pages::web-pages.filament.form.description.label'))
@@ -79,6 +86,7 @@ class WebPageGroupResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->reorderable('ordering')
             ->columns([
                 TextColumn::make('singular_name')
                     ->label(__('web-pages::web-pages.filament.table.singular_name'))
